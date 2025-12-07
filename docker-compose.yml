@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    container_name: moicuoi_web
+    ports:
+      - "8888:8888"
+    restart: unless-stopped
+    volumes:
+      # Mount volume để có thể update files mà không cần rebuild
+      - ./:/usr/share/nginx/html:ro
+    networks:
+      - moicuoi_network
+
+networks:
+  moicuoi_network:
+    driver: bridge
+
